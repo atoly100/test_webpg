@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="static/js/application.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome to FLOW!</h1>
+    <p>Data will appear below in real time, updates every 5 seconds.</p>
+  </div>
+</div>
+<div class="container" id="content">
+    <div class="row">
+        <h3><b>Accumulated Volume (in mL):</b></h3>
+        <h4>Sensor 1:</h4>
+        <div id="log">
+        </div> <!-- /#log -->
+        <br>
+
+
+
+        <h4>Sensor 2:</h4>
+        <div id="log2">
+        </div> <!-- /#log2 -->
+        <br>
+
+        <h4>Sensor 3:</h4>
+        <div id="log3">
+        </div> <!-- /#log3 -->
+
+        <br>
+
+
+
+    </div>
+</div>
+</body>
+</html>
