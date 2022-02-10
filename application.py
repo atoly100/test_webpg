@@ -71,9 +71,9 @@ def randomNumberGenerator():
         #socketio.emit('newnumber', {'number': number}, namespace='/test')
 
         #data1 = aio.receive('temperature').value
-        data1 = current_time
-        data2 = current_time
-        data3 = current_time
+        data1 = 1
+        data2 = 2
+        data3 = 3
 
 
 
