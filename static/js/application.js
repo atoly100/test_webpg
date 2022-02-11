@@ -2,7 +2,7 @@
 $(document).ready(function(){
     //connect to the socket server.
     console.log("connect to"  + document.domain + ":" + document.port + "/test");
-    var socket = io.connect('https://' + document.domain + ':' + document.port + '/test');
+    var socket = io.connect('wss://' + location.host + '/test');
     //var numbers_received = [];
     var num1 = 0;
     var num2 = 0;
