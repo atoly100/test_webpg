@@ -25,6 +25,7 @@ from time import sleep
 from threading import Thread, Event
 from Adafruit_IO import Client
 from datetime import datetime
+import os
 
 aio = Client('tsukprasert', 'aio_pYrY17KjdsRub3e4xDZ2PZasU2JX')
 aio2 = Client('atoly', 'aio_ubMl44xF6TvY5NLs6oO3GHko3y25')
