@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
     //connect to the socket server.
+    console.log("connect to"  + document.domain + ":" + location.port + "/test");
     var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
     //var numbers_received = [];
     var num1 = 0;
