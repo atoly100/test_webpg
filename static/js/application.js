@@ -16,14 +16,14 @@ $(document).ready(function(){
     });
 
     socket.on('newnumber2', function(msg) {
-        console.log("Received number" + msg.number);
+        console.log("Received number" + msg);
         num2 = msg.number;
         $('#log2').html(num2);
     });
 
     console.log("just before newnumber3")
     socket.on('newnumber3', function(msg) {
-        console.log("Received number" + msg.number);
+        console.log("Received number" + msg);
         num3 = msg.number;
         $('#log3').html(num3);
     });
