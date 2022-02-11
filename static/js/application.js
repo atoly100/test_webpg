@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     //receive details from server
     socket.on('newnumber', function(msg) {
-        console.log("Received number" + msg.number);
+        console.log("Received number" + msg);
         num1 = msg;
         $('#log').html(num1);
     });
