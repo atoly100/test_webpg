@@ -11,7 +11,7 @@ $(document).ready(function(){
     //receive details from server
     socket.on('newnumber', function(msg) {
         console.log("Received number" + msg);
-        num1 = msg;
+        num1 = msg.number;
         $('#log').html(num1);
     });
 
