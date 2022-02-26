@@ -65,8 +65,9 @@ thread_stop_event = Event()
 
 
 def pull_data():
-    message = subscriber.pull(subscription=subscription_path)
-    message.ack()
+    message = subscriber.pull(subscription=subscription_path, return_immediately=True)
+    if message is not None:
+        message.ack()
     return message
 
 
@@ -91,7 +92,9 @@ def randomNumberGenerator():
         #data1 = aio.receive('temperature').value
         #data1 = current_time
         #data1 = 1
-        data1 = str(pull_data())
+        data = pull_data()
+        if data is not None:
+            data1 = str(data)
         data2 = 2
         data3 = 3
 
