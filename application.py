@@ -102,7 +102,7 @@ def randomNumberGenerator():
         #data1 = 1
         response = pull_data()
         for msg in response.received_messages:
-            data1 = str(msg.message.data)
+            data1 = msg.message.data.decode("utf_8")
         data2 = 2
         data3 = 3
 
