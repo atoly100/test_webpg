@@ -91,7 +91,7 @@ def randomNumberGenerator():
         #data1 = aio.receive('temperature').value
         #data1 = current_time
         #data1 = 1
-        data1 = pull_data()
+        data1 = str(pull_data())
         data2 = 2
         data3 = 3
 
