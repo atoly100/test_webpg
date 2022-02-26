@@ -26,6 +26,15 @@ from threading import Thread, Event
 from Adafruit_IO import Client
 from datetime import datetime
 import os
+from google.cloud import pubsub_v1
+
+project_id = "hopeful-depot-342514"
+topic_id = "my-topic"
+subscription_id = "my-web-app-sub-id"
+subscriber = pubsub_v1.SubscriberClient()
+topic_name = f"/projects/{project_id}/topics/{topic_id}"
+subscription_name = f"/projects/{project_id}/subscriptions/{subscription_id}"
+subscriber.create_subscription(name=subscription_name, topic=topic_name)
 
 aio = Client('tsukprasert', 'aio_pYrY17KjdsRub3e4xDZ2PZasU2JX')
 aio2 = Client('atoly', 'aio_ubMl44xF6TvY5NLs6oO3GHko3y25')
@@ -53,6 +62,13 @@ socketio = SocketIO(app, async_mode=async_mode, logger=True, engineio_logger=Tru
 thread = Thread()
 thread_stop_event = Event()
 
+
+def pull_data():
+    message = subscriber.pull(subscription=subscription_name)
+    message.ack()
+    return message
+
+
 def randomNumberGenerator():
     """
     Generate a random number every 1 second and emit to a socketio instance (broadcast)
@@ -72,8 +88,9 @@ def randomNumberGenerator():
         #socketio.emit('newnumber', {'number': number}, namespace='/test')
 
         #data1 = aio.receive('temperature').value
-        data1 = current_time
+        #data1 = current_time
         #data1 = 1
+        data1 = pull_data()
         data2 = 2
         data3 = 3
 
