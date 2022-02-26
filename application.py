@@ -31,10 +31,11 @@ from google.cloud import pubsub_v1
 project_id = "hopeful-depot-342514"
 topic_id = "my-topic"
 subscription_id = "my-web-app-sub-id"
+publisher = pubsub_v1.PublisherClient()
+topic_path = publisher.topic_path(project_id, topic_id)
 subscriber = pubsub_v1.SubscriberClient()
-topic_name = f"/projects/{project_id}/topics/{topic_id}"
-subscription_name = f"/projects/{project_id}/subscriptions/{subscription_id}"
-subscriber.create_subscription(name=subscription_name, topic=topic_name)
+subscription_path = subscriber.subscription_path(project_id, subscription_id)
+subscriber.create_subscription(name=subscription_path, topic=topic_path)
 
 aio = Client('tsukprasert', 'aio_pYrY17KjdsRub3e4xDZ2PZasU2JX')
 aio2 = Client('atoly', 'aio_ubMl44xF6TvY5NLs6oO3GHko3y25')
