@@ -35,7 +35,7 @@ publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(project_id, topic_id)
 subscriber = pubsub_v1.SubscriberClient()
 subscription_path = subscriber.subscription_path(project_id, subscription_id)
-subscriber.create_subscription(name=subscription_path, topic=topic_path)
+#subscriber.create_subscription(name=subscription_path, topic=topic_path)
 
 aio = Client('tsukprasert', 'aio_pYrY17KjdsRub3e4xDZ2PZasU2JX')
 aio2 = Client('atoly', 'aio_ubMl44xF6TvY5NLs6oO3GHko3y25')
@@ -65,10 +65,18 @@ thread_stop_event = Event()
 
 
 def pull_data():
-    message = subscriber.pull(subscription=subscription_path, return_immediately=True)
-    if message is not None:
-        message.ack()
-    return message
+    response = subscriber.pull(request={
+        "subscription": subscription_path,
+        "max_messages": 1
+    })
+
+    ack_ids = [msg.ack_id for msg in response.received_messages]
+    subscriber.acknowledge(request={
+        "subscription": subscription_path,
+        "ack_ids": ack_ids
+    })
+
+    return response
 
 
 def randomNumberGenerator():
@@ -92,9 +100,9 @@ def randomNumberGenerator():
         #data1 = aio.receive('temperature').value
         #data1 = current_time
         #data1 = 1
-        data = pull_data()
-        if data is not None:
-            data1 = str(data)
+        response = pull_data()
+        for msg in response.received_messages:
+            data1 = str(msg.message.data)
         data2 = 2
         data3 = 3
 
