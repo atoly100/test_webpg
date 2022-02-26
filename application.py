@@ -65,7 +65,7 @@ thread_stop_event = Event()
 
 
 def pull_data():
-    message = subscriber.pull(subscription=subscription_name)
+    message = subscriber.pull(subscription=subscription_path)
     message.ack()
     return message
 
