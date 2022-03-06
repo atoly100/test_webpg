@@ -27,14 +27,15 @@ from Adafruit_IO import Client
 from datetime import datetime
 import os
 from google.cloud import pubsub_v1
+from google.cloud import bigquery
 
-project_id = "hopeful-depot-342514"
-topic_id = "my-topic"
-subscription_id = "my-web-app-sub-id"
-publisher = pubsub_v1.PublisherClient()
-topic_path = publisher.topic_path(project_id, topic_id)
-subscriber = pubsub_v1.SubscriberClient()
-subscription_path = subscriber.subscription_path(project_id, subscription_id)
+project_id = "magnetic-set-341419"
+# topic_id = "my-topic"
+# subscription_id = "my-web-app-sub-id"
+# publisher = pubsub_v1.PublisherClient()
+# topic_path = publisher.topic_path(project_id, topic_id)
+# subscriber = pubsub_v1.SubscriberClient()
+# subscription_path = subscriber.subscription_path(project_id, subscription_id)
 #subscriber.create_subscription(name=subscription_path, topic=topic_path)
 
 aio = Client('tsukprasert', 'aio_pYrY17KjdsRub3e4xDZ2PZasU2JX')
@@ -64,19 +65,33 @@ thread = Thread()
 thread_stop_event = Event()
 
 
-def pull_data():
-    response = subscriber.pull(request={
-        "subscription": subscription_path,
-        "max_messages": 1
-    })
+def query_latest_number(node_id="node1"):
+    client = bigquery.Client()
+    query = """
+        SELECT times, number 
+        FROM `esp32.esp32_{}` 
+        WHERE times = 
+            (select max(a.times) from `esp32.esp32_{}` a)
+    """.format(node_id, node_id)
+    query_job = client.query(query)
+    for row in query_job:
+        print("Timestamp: {} Number: {}".format(row["times"], row["number"]))
+        return row["number"]
 
-    ack_ids = [msg.ack_id for msg in response.received_messages]
-    subscriber.acknowledge(request={
-        "subscription": subscription_path,
-        "ack_ids": ack_ids
-    })
 
-    return response
+# def pull_data():
+#     response = subscriber.pull(request={
+#         "subscription": subscription_path,
+#         "max_messages": 1
+#     })
+#
+#     ack_ids = [msg.ack_id for msg in response.received_messages]
+#     subscriber.acknowledge(request={
+#         "subscription": subscription_path,
+#         "ack_ids": ack_ids
+#     })
+#
+#     return response
 
 
 def randomNumberGenerator():
@@ -100,14 +115,12 @@ def randomNumberGenerator():
         #data1 = aio.receive('temperature').value
         #data1 = current_time
         #data1 = 1
-        response = pull_data()
-        for msg in response.received_messages:
-            data1 = msg.message.data.decode("utf_8")
+        # response = pull_data()
+        # for msg in response.received_messages:
+        #     data1 = msg.message.data.decode("utf_8")
+        data1 = query_latest_number("node1")
         data2 = 2
         data3 = 3
-
-
-
 
 
         #data2 = aio2.receive('sensor2').value
@@ -121,13 +134,16 @@ def randomNumberGenerator():
 
         socketio.sleep(5)
 
+
 def ack():
     print("newnumber3 received")
+
 
 @app.route('/')
 def index():
     #only by sending this page first will the client be connected to the socketio instance
     return render_template('index.html')
+
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
@@ -140,13 +156,16 @@ def test_connect():
         print("Starting Thread")
         thread = socketio.start_background_task(randomNumberGenerator)
 
+
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected')
 
+
 @socketio.on('error', namespace='/test')
 def error():
     print('Client error')
+
 
 if __name__ == '__main__':
     socketio.run(app, port=int(os.environ.get('PORT', '5000')))
