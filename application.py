@@ -132,7 +132,7 @@ def randomNumberGenerator():
 
         socketio.emit('newnumber3', {'number': data3}, namespace='/test', callback=ack)
 
-        socketio.sleep(5)
+        socketio.sleep(1)
 
 def ack():
     print("newnumber3 received")
