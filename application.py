@@ -119,8 +119,8 @@ def randomNumberGenerator():
         # for msg in response.received_messages:
         #     data1 = msg.message.data.decode("utf_8")
         data1 = query_latest_number("node1")
-        data2 = 2
-        data3 = 3
+        data2 = query_latest_number("node2")
+        data3 = query_latest_number("node3")
 
 
         #data2 = aio2.receive('sensor2').value
@@ -134,10 +134,8 @@ def randomNumberGenerator():
 
         socketio.sleep(5)
 
-
 def ack():
     print("newnumber3 received")
-
 
 @app.route('/')
 def index():
