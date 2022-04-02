@@ -27,7 +27,7 @@ $(document).ready(function(){
     chart.draw();
 
     chart_redraw = function() {
-        console.log("chart_redraw: n1 = " + num1 + " n2 = " + num2 + " n3 = " + num3)
+        char.data(data);
         chart.draw();
     }
 
