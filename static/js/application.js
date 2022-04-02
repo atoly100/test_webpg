@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     //connect to the socket server.
     console.log("connect to"  + document.domain + ":" + document.port + "/test");
@@ -8,11 +7,11 @@ $(document).ready(function(){
     var num2 = 0;
     var num3 = 0;
 
+    // create the chart
+    var chart = anychart.pie();
+
     chart_redraw = function() {
         console.log("chart_redraw called");
-
-        // create the chart
-        var chart = anychart.pie();
 
         // set the chart title
         chart.title("Population by Race for the United States: 2010 Census");
@@ -35,16 +34,13 @@ $(document).ready(function(){
         chart.draw();
     }
 
-    $("#log").change(chart_redraw);
-    $("#log2").change(chart_redraw);
-    $("#log3").change(chart_redraw);
+    setInterval(chart_redraw, 5000);
 
     //receive details from server
     socket.on('newnumber', function(msg) {
         console.log("Received number 1" + msg);
         num1 = msg.number;
         $('#log').html(num1);
-        chart_redraw();
     });
 
     socket.on('newnumber2', function(msg) {
