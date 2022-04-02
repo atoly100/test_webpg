@@ -9,6 +9,8 @@ $(document).ready(function(){
     var num3 = 0;
 
     chart_redraw = function() {
+        console.log("chart_redraw called");
+
         // create the chart
         var chart = anychart.pie();
 
