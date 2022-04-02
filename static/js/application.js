@@ -25,15 +25,9 @@ $(document).ready(function(){
     // display the chart in the container
     chart.container('chart');
     chart.draw();
-    chart_redraw = function(n1, n2, n3) {
-        console.log("chart_redraw: n1 = " + n1 + " n2 = " + n2 + " n3 = " + n3)
-        var data = [
-            { x: "Sensor 1", value: n1 },
-            { x: "Sensor 2", value: n2 },
-            { x: "Sensor 3", value: n3 },
-        ];
 
-        chart.data(data);
+    chart_redraw = function() {
+        console.log("chart_redraw: n1 = " + num1 + " n2 = " + num2 + " n3 = " + num3)
         chart.draw();
     }
 
@@ -42,14 +36,14 @@ $(document).ready(function(){
         console.log("Received number" + msg);
         num1 = msg.number;
         $('#log').html(num1);
-        chart_redraw(num1, num2, num3);
+        chart_redraw();
     });
 
     socket.on('newnumber2', function(msg) {
         console.log("Received number" + msg);
         num2 = msg.number;
         $('#log2').html(num2);
-        chart_redraw(num1, num2, num3);
+        chart_redraw();
     });
 
     console.log("just before newnumber3")
@@ -57,6 +51,6 @@ $(document).ready(function(){
         console.log("Received number" + msg);
         num3 = msg.number;
         $('#log3').html(num3);
-        chart_redraw(num1, num2, num3);
+        chart_redraw();
     });
 });
