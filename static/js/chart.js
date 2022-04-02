@@ -3,6 +3,9 @@ anychart.onDocumentReady(function() {
     var log2 = document.getElementById("log2").innerText
     var log3 = document.getElementById("log3").innerText
 
+    console.log("log " + log);
+    console.log("outerText " + document.getElementById("log").outerText);
+
     // set the data
     var data = [
         {x: "Sensor 1", value: log},
