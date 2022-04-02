@@ -14,7 +14,7 @@ $(document).ready(function(){
         console.log("chart_redraw called");
 
         // set the chart title
-        chart.title("Accumulated Volume (in mL");
+        chart.title("Accumulated Volume (in mL)");
 
         // add the data
         var data = [
