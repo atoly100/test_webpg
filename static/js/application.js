@@ -8,7 +8,25 @@ $(document).ready(function(){
     var num2 = 0;
     var num3 = 0;
 
+    // create the chart
+    var chart = anychart.pie();
+
+    // set the chart title
+    chart.title("Population by Race for the United States: 2010 Census");
+
+    // add the data
+    var data = [
+        { x: "Sensor 1", value: num1 },
+        { x: "Sensor 2", value: num2 },
+        { x: "Sensor 3", value: num3 },
+    ];
+    chart.data(data);
+
+    // display the chart in the container
+    chart.container('chart');
+    chart.draw();
     chart_redraw = function(n1, n2, n3) {
+        console.log("chart_redraw: n1 = " + n1 + " n2 = " + n2 + " n3 = " + n3)
         var data = [
             { x: "Sensor 1", value: n1 },
             { x: "Sensor 2", value: n2 },
@@ -41,22 +59,4 @@ $(document).ready(function(){
         $('#log3').html(num3);
         chart_redraw(num1, num2, num3);
     });
-
-    // create the chart
-    var chart = anychart.pie();
-
-    // set the chart title
-    chart.title("Population by Race for the United States: 2010 Census");
-
-    // add the data
-    var data = [
-        { x: "Sensor 1", value: num1 },
-        { x: "Sensor 2", value: num2 },
-        { x: "Sensor 3", value: num3 },
-    ];
-    chart.data(data);
-
-    // display the chart in the container
-    chart.container('chart');
-    chart.draw();
 });
