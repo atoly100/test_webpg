@@ -34,6 +34,7 @@ $(document).ready(function(){
         chart.draw();
     }
 
+    // redraw chart every 5 seconds
     setInterval(chart_redraw, 5000);
 
     //receive details from server
