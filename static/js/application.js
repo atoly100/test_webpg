@@ -27,7 +27,7 @@ $(document).ready(function(){
     chart.draw();
 
     chart_redraw = function() {
-        char.data(data);
+        chart.data(data);
         chart.draw();
     }
 
