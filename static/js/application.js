@@ -22,6 +22,11 @@ $(document).ready(function(){
     ];
     chart.data(data);
 
+    // set legend position
+    chart.legend().position("right");
+    // set items layout
+    chart.legend().itemsLayout("vertical");
+
     // display the chart in the container
     chart.container('chart');
     chart.draw();
