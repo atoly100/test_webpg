@@ -44,6 +44,7 @@ $(document).ready(function(){
         console.log("Received number 1" + msg);
         num1 = msg.number;
         $('#log').html(num1);
+        chart_redraw();
     });
 
     socket.on('newnumber2', function(msg) {
