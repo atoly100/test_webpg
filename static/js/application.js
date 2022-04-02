@@ -33,24 +33,24 @@ $(document).ready(function(){
         chart.draw();
     }
 
+    $("#log").change(chart_redraw);
+    $("#log2").change(chart_redraw);
+    $("#log3").change(chart_redraw);
+
     //receive details from server
     socket.on('newnumber', function(msg) {
-        chart_redraw();
         console.log("Received number 1" + msg);
         num1 = msg.number;
         $('#log').html(num1);
     });
 
     socket.on('newnumber2', function(msg) {
-        chart_redraw();
         console.log("Received number 2" + msg);
         num2 = msg.number;
         $('#log2').html(num2);
     });
 
-    console.log("just before newnumber3")
     socket.on('newnumber3', function(msg) {
-        chart_redraw();
         console.log("Received number 3" + msg);
         num3 = msg.number;
         $('#log3').html(num3);
