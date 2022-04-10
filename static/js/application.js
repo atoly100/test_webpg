@@ -41,18 +41,18 @@ $(document).ready(function(){
     socket.on('newnumber', function(msg) {
         console.log("Received number 1" + msg);
         num1 = msg.number;
-        $('#log').html(num1);
+        $('#log').attr("placeholder", "Sensor 1: " + num1).blur();
     });
 
     socket.on('newnumber2', function(msg) {
         console.log("Received number 2" + msg);
         num2 = msg.number;
-        $('#log2').html(num2);
+        $('#log2').attr("placeholder", "Sensor 2: " + num2).blur();
     });
 
     socket.on('newnumber3', function(msg) {
         console.log("Received number 3" + msg);
         num3 = msg.number;
-        $('#log3').html(num3);
+        $('#log3').attr("placeholder", "Sensor 3: " + num3).blur();
     });
 });
