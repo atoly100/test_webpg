@@ -32,6 +32,11 @@ $(document).ready(function(){
         // display the chart in the container
         chart.container('chart');
         chart.draw();
+
+        var sorted_numbers = [ num1, num2, num3 ].sort().reverse();
+        $("#id_01").text(sorted_numbers[0]);
+        $("#id_02").text(sorted_numbers[1]);
+        $("#id_03").text(sorted_numbers[2]);
     }
 
     // redraw chart every 5 seconds
@@ -41,18 +46,18 @@ $(document).ready(function(){
     socket.on('newnumber', function(msg) {
         console.log("Received number 1" + msg);
         num1 = msg.number;
-        $('#log').attr("placeholder", "Sensor 1:&nbsp;&nbsp;&nbsp;&nbsp;" + num1).blur();
+        $('#log').attr("placeholder", "Sensor 1: " + num1).blur();
     });
 
     socket.on('newnumber2', function(msg) {
         console.log("Received number 2" + msg);
         num2 = msg.number;
-        $('#log2').attr("placeholder", "Sensor 2:&nbsp;&nbsp;&nbsp;&nbsp;" + num2).blur();
+        $('#log2').attr("placeholder", "Sensor 2: " + num2).blur();
     });
 
     socket.on('newnumber3', function(msg) {
         console.log("Received number 3" + msg);
         num3 = msg.number;
-        $('#log3').attr("placeholder", "Sensor 3:&nbsp;&nbsp;&nbsp;&nbsp;" + num3).blur();
+        $('#log3').attr("placeholder", "Sensor 3: " + num3).blur();
     });
 });
