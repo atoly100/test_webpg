@@ -33,10 +33,16 @@ $(document).ready(function(){
         chart.container('chart');
         chart.draw();
 
-        var sorted_numbers = [ num1, num2, num3 ].sort().reverse();
-        $("#id_01").text(sorted_numbers[0]);
-        $("#id_02").text(sorted_numbers[1]);
-        $("#id_03").text(sorted_numbers[2]);
+        var numbers = [ num1, num2, num3 ].sort().reverse();
+        get_label = function(n) {
+            if (n == num1) return "Sensor 1: " + n;
+            if (n == num2) return "Sensor 2: " + n;
+            if (n == num3) return "Sensor 3: " + n;
+        }
+
+        $("#id_01").text(get_label(numbers[0]));
+        $("#id_02").text(get_label(numbers[1]));
+        $("#id_03").text(get_label(numbers[2]));
     }
 
     // redraw chart every 5 seconds
