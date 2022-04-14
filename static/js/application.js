@@ -35,6 +35,8 @@ $(document).ready(function(){
         // set items layout
         chart.legend().itemsLayout("vertical");
 
+        chart.radius("150%");
+
         // display the chart in the container
         chart.container('chart');
         chart.draw();
