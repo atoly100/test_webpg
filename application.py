@@ -66,17 +66,18 @@ thread_stop_event = Event()
 
 
 def query_latest_number(node_id="node1"):
-    client = bigquery.Client()
-    query = """
-        SELECT times, number 
-        FROM `esp32.esp32_{}` 
-        WHERE times = 
-            (select max(a.times) from `esp32.esp32_{}` a)
-    """.format(node_id, node_id)
-    query_job = client.query(query)
-    for row in query_job:
-        print("Timestamp: {} Number: {}".format(row["times"], row["number"]))
-        return row["number"]
+    return int(random() * 100)
+    # client = bigquery.Client()
+    # query = """
+    #     SELECT times, number
+    #     FROM `esp32.esp32_{}`
+    #     WHERE times =
+    #         (select max(a.times) from `esp32.esp32_{}` a)
+    # """.format(node_id, node_id)
+    # query_job = client.query(query)
+    # for row in query_job:
+    #     print("Timestamp: {} Number: {}".format(row["times"], row["number"]))
+    #     return row["number"]
 
 
 # def pull_data():
