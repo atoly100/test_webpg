@@ -4,12 +4,12 @@ $(document).ready(function(){
     var socket = io.connect('wss://' + location.host + '/test');
     //var numbers_received = [];
     var numbers = [
-        { label: "Sensor 1", value: 0 },
-        { label: "Sensor 2", value: 0 },
-        { label: "Sensor 3", value: 0 },
-        { label: "Sensor 4", value: 0 },
-        { label: "Sensor 5", value: 0 },
-        { label: "Sensor 6", value: 0 }
+//        { label: "Sensor 1", value: 0 },
+//        { label: "Sensor 2", value: 0 },
+//        { label: "Sensor 3", value: 0 },
+//        { label: "Sensor 4", value: 0 },
+//        { label: "Sensor 5", value: 0 },
+//        { label: "Sensor 6", value: 0 }
     ];
 
     // create the chart
@@ -25,7 +25,7 @@ $(document).ready(function(){
         var data = [];
         for (i = 0; i < numbers.length; i++) {
             var value = { x: numbers[i].label, value: numbers[i].value };
-            //data.push(value);
+            data.push(value);
         }
 
         chart.data(data);
