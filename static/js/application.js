@@ -24,7 +24,8 @@ $(document).ready(function(){
         // add the data
         var data = [];
         for (i = 0; i < numbers.length; i++) {
-            data.push({ x: numbers[i].label, value: numbers[i].value});
+            var value = { x: numbers[i].label, value: numbers[i].value };
+            data.push(value);
         }
 
         chart.data(data);
