@@ -123,7 +123,7 @@ def randomNumberGenerator():
             data[i - 1] = query_latest_number("node{}".format(i))
             socketio.emit("newnumber{}".format(i), {"number": data[i - 1]}, namespace="/test", callback=ack)
 
-        socketio.sleep(1)
+        socketio.sleep(2)
 
 def ack():
     print("newnumber3 received")
