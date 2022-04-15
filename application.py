@@ -118,23 +118,10 @@ def randomNumberGenerator():
         # response = pull_data()
         # for msg in response.received_messages:
         #     data1 = msg.message.data.decode("utf_8")
-        data1 = query_latest_number("node1")
-        data2 = query_latest_number("node2")
-        data3 = query_latest_number("node3")
-        data4 = query_latest_number("node4")
-        data5 = query_latest_number("node5")
-        data6 = query_latest_number("node6")
-
-        #data2 = aio2.receive('sensor2').value
-        print("I am printing data 2 '" + str(data2) + "'")
-        #data3 = aio3.receive('sensor3').value
-        print("I am printing data3   '" + str(data3) + "'")
-        socketio.emit('newnumber', {'number': data1}, namespace='/test', callback=ack)
-        socketio.emit('newnumber2', {'number': data2}, namespace='/test', callback=ack)
-        socketio.emit('newnumber3', {'number': data3}, namespace='/test', callback=ack)
-        socketio.emit('newnumber4', {'number': data4}, namespace='/test', callback=ack)
-        socketio.emit('newnumber5', {'number': data5}, namespace='/test', callback=ack)
-        socketio.emit('newnumber6', {'number': data6}, namespace='/test', callback=ack)
+        data = [0, 0, 0, 0, 0, 0]
+        for i in range(1, 6):
+            data[i - 1] = query_latest_number("node{}".format(i))
+            socketio.emit("newnumber{}".format(i), {"number": data[i - 1]}, namespace="/test", callback=ack)
 
         socketio.sleep(1)
 
