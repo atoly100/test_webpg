@@ -35,7 +35,8 @@ $(document).ready(function(){
         // set items layout
         chart.legend().itemsLayout("vertical");
 
-        chart.height("800px");
+        chart.height("400px");
+        chart.width("400px");
 
         // display the chart in the container
         chart.container('chart');
