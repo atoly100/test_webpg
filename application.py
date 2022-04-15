@@ -29,7 +29,7 @@ import os
 from google.cloud import pubsub_v1
 from google.cloud import bigquery
 
-project_id = "magnetic-set-341419"
+project_id = "durable-cursor-347119" # magnetic-set-341419"
 # topic_id = "my-topic"
 # subscription_id = "my-web-app-sub-id"
 # publisher = pubsub_v1.PublisherClient()
@@ -66,18 +66,17 @@ thread_stop_event = Event()
 
 
 def query_latest_number(node_id="node1"):
-    return int(random() * 100)
-    # client = bigquery.Client()
-    # query = """
-    #     SELECT times, number
-    #     FROM `esp32.esp32_{}`
-    #     WHERE times =
-    #         (select max(a.times) from `esp32.esp32_{}` a)
-    # """.format(node_id, node_id)
-    # query_job = client.query(query)
-    # for row in query_job:
-    #     print("Timestamp: {} Number: {}".format(row["times"], row["number"]))
-    #     return row["number"]
+    client = bigquery.Client()
+    query = """
+        SELECT times, number
+        FROM `esp32.esp32_{}`
+        WHERE times =
+            (select max(a.times) from `esp32.esp32_{}` a)
+    """.format(node_id, node_id)
+    query_job = client.query(query)
+    for row in query_job:
+        print("Timestamp: {} Number: {}".format(row["times"], row["number"]))
+        return row["number"]
 
 
 # def pull_data():
