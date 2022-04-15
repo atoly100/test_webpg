@@ -9,7 +9,7 @@ $(document).ready(function(){
         { label: "Sensor 3", value: 0 },
         { label: "Sensor 4", value: 0 },
         { label: "Sensor 5", value: 0 },
-        { label: "Sensor 6", value: 0 },
+        { label: "Sensor 6", value: 0 }
     ];
 
     // create the chart
