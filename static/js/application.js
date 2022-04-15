@@ -45,7 +45,8 @@ $(document).ready(function(){
 
         for (i = 0; i < sorted_numbers.length; i++) {
             $("#id_0" + (i + 1)).text(get_label(sorted_numbers[i]));
-    }
+        }
+    };
 
     // redraw chart every 5 seconds
     setInterval(chart_redraw, 5000);
@@ -53,8 +54,9 @@ $(document).ready(function(){
     //receive details from server
     for (i = 0; i < numbers.length; i++) {
         socket.on("newnumber" + (i + 1), function(msg) {
-        console.log("Received number " + (i + 1) + " " + msg);
-        numbers[i].value = parseInt(msg.number);
-        $("#log" + (i + 1)).attr("placeholder", numbers[i].label + ": " + numbers[i].value).blur();
-    });
+            console.log("Received number " + (i + 1) + " " + msg);
+            numbers[i].value = parseInt(msg.number);
+            $("#log" + (i + 1)).attr("placeholder", numbers[i].label + ": " + numbers[i].value).blur();
+        });
+    }
 });
