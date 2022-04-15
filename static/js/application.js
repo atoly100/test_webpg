@@ -45,7 +45,7 @@ $(document).ready(function(){
         get_label = function(n) { return n.label + ": " + n.value; }
 
         for (i = 0; i < sorted_numbers.length; i++) {
-            $("#id_0" + (i + 1)).text(get_label(sorted_numbers[i]));
+            $("#id_01").text(get_label(sorted_numbers[i]));
         }
     };
 
@@ -54,10 +54,11 @@ $(document).ready(function(){
 
     //receive details from server
     for (i = 0; i < numbers.length; i++) {
-        socket.on("newnumber" + (i + 1), function(msg) {
+        console.log("newnumber" + (i + 1));
+        socket.on("newnumber1", function(msg) {
             console.log("Received number " + (i + 1) + " " + msg);
             numbers[i].value = parseInt(msg.number);
-            $("#log" + (i + 1)).attr("placeholder", numbers[i].label + ": " + numbers[i].value).blur();
+            $("#log1").attr("placeholder", numbers[i].label + ": " + numbers[i].value).blur();
         });
     }
 });
