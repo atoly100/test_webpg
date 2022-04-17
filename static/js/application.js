@@ -41,7 +41,7 @@ $(document).ready(function(){
         chart.container('chart');
         chart.draw();
 
-        compare_func = function(a, b) { return parseInt(a) - parseInt(b); };
+        compare_func = function(a, b) { return a - b; };
         var sorted_numbers = numbers.sort(compare_func).reverse();
         get_label = function(n) { return `${n.label} ${n.value}`; };
 
@@ -59,37 +59,37 @@ $(document).ready(function(){
     //receive details from server
     socket.on('newnumber', function(msg) {
         console.log("Received number 1" + msg);
-        numbers[0].value = msg.number;
+        numbers[0].value = parseInt(msg.number);
         $('#log').attr("placeholder", "Sensor 1: " + msg.number).blur();
     });
 
     socket.on('newnumber2', function(msg) {
         console.log("Received number 2" + msg);
-        numbers[1].value = msg.number;
+        numbers[1].value = parseInt(msg.number);
         $('#log2').attr("placeholder", "Sensor 2: " + msg.number).blur();
     });
 
     socket.on('newnumber3', function(msg) {
         console.log("Received number 3" + msg);
-        numbers[2].value = msg.number;
+        numbers[2].value = parseInt(msg.number);
         $('#log3').attr("placeholder", "Sensor 3: " + msg.number).blur();
     });
 
     socket.on('newnumber4', function(msg) {
         console.log("Received number 4" + msg);
-        numbers[3].value = msg.number;
+        numbers[3].value = parseInt(msg.number);
         $('#log4').attr("placeholder", "Sensor 4: " + msg.number).blur();
     });
 
     socket.on('newnumber5', function(msg) {
         console.log("Received number 5" + msg);
-        numbers[4].value = msg.number;
+        numbers[4].value = parseInt(msg.number);
         $('#log5').attr("placeholder", "Sensor 5: " + msg.number).blur();
     });
 
     socket.on('newnumber6', function(msg) {
         console.log("Received number 6" + msg);
-        numbers[5].value = msg.number;
+        numbers[5].value = parseInt(msg.number);
         $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
     });
 
