@@ -42,17 +42,18 @@ $(document).ready(function(){
         chart.draw();
 
         compare_func = function(a, b) { return a.value - b.value; };
+        // make a copy of numbers to sorted_numbers to avoid updates affecting sort order
         var sorted_numbers = [];
         numbers.forEach(function(a) { sorted_numbers.push({ label: a.label, value: a.value })});
         sorted_numbers.sort(compare_func).reverse();
         get_label = function(n) { return `${n.label} ${n.value}`; };
 
-        $("#id_01").text(get_label(numbers[0]));
-        $("#id_02").text(get_label(numbers[1]));
-        $("#id_03").text(get_label(numbers[2]));
-        $("#id_04").text(get_label(numbers[3]));
-        $("#id_05").text(get_label(numbers[4]));
-        $("#id_06").text(get_label(numbers[5]));
+        $("#id_01").text(get_label(sorted_numbers[0]));
+        $("#id_02").text(get_label(sorted_numbers[1]));
+        $("#id_03").text(get_label(sorted_numbers[2]));
+        $("#id_04").text(get_label(sorted_numbers[3]));
+        $("#id_05").text(get_label(sorted_numbers[4]));
+        $("#id_06").text(get_label(sorted_numbers[5]));
     }
 
     // redraw chart every 5 seconds
