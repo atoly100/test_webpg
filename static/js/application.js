@@ -42,7 +42,9 @@ $(document).ready(function(){
         chart.draw();
 
         compare_func = function(a, b) { return a.value - b.value; };
-        var sorted_numbers = numbers.sort(compare_func).reverse();
+        var sorted_numbers = [];
+        numbers.forEach(function(a) { sorted_numbers.push({ label: a.label, value: a.value })});
+        sorted_numbers.sort(compare_func).reverse();
         get_label = function(n) { return `${n.label} ${n.value}`; };
 
         $("#id_01").text(get_label(numbers[0]));
