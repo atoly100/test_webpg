@@ -47,13 +47,14 @@ $(document).ready(function(){
         numbers.forEach(function(a) { sorted_numbers.push({ label: a.label, value: a.value })});
         sorted_numbers.sort(compare_func).reverse();
         get_label = function(n) { return `${n.label} ${n.value}`; };
-
-        $("#id_01").text(get_label(sorted_numbers[0]));
-        $("#id_02").text(get_label(sorted_numbers[1]));
-        $("#id_03").text(get_label(sorted_numbers[2]));
-        $("#id_04").text(get_label(sorted_numbers[3]));
-        $("#id_05").text(get_label(sorted_numbers[4]));
-        $("#id_06").text(get_label(sorted_numbers[5]));
+        var update_func = function(a, index){ $(`#id_0${index}`).text(get_label(sorted_numbers[index])); };
+        sorted_numbers.forEach(update_func);
+//        $("#id_01").text(get_label(sorted_numbers[0]));
+//        $("#id_02").text(get_label(sorted_numbers[1]));
+//        $("#id_03").text(get_label(sorted_numbers[2]));
+//        $("#id_04").text(get_label(sorted_numbers[3]));
+//        $("#id_05").text(get_label(sorted_numbers[4]));
+//        $("#id_06").text(get_label(sorted_numbers[5]));
     }
 
     // redraw chart every 5 seconds
