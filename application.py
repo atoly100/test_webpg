@@ -28,6 +28,9 @@ from datetime import datetime
 import os
 from google.cloud import pubsub_v1
 from google.cloud import bigquery
+# from dotenv import load_dotenv
+#
+# load_dotenv()
 
 project_id = "durable-cursor-347119" # magnetic-set-341419"
 # topic_id = "my-topic"

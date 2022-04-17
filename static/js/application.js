@@ -3,12 +3,14 @@ $(document).ready(function(){
     console.log("connect to"  + document.domain + ":" + document.port + "/test");
     var socket = io.connect('wss://' + location.host + '/test');
     //var numbers_received = [];
-    var num1 = 0;
-    var num2 = 0;
-    var num3 = 0;
-    var num4 = 0;
-    var num5 = 0;
-    var num6 = 0;
+    var numbers = [
+        { label: "Sensor 1: ", value: 0 },
+        { label: "Sensor 2: ", value: 0 },
+        { label: "Sensor 3: ", value: 0 },
+        { label: "Sensor 4: ", value: 0 },
+        { label: "Sensor 5: ", value: 0 },
+        { label: "Sensor 6: ", value: 0 }
+    ];
 
     // create the chart
     var chart = anychart.pie();
@@ -21,12 +23,12 @@ $(document).ready(function(){
 
         // add the data
         var data = [
-            { x: "Sensor 1", value: num1 },
-            { x: "Sensor 2", value: num2 },
-            { x: "Sensor 3", value: num3 },
-            { x: "Sensor 4", value: num4 },
-            { x: "Sensor 5", value: num5 },
-            { x: "Sensor 6", value: num6 },
+            { x: "Sensor 1", value: numbers[0].value },
+            { x: "Sensor 2", value: numbers[1].value },
+            { x: "Sensor 3", value: numbers[2].value },
+            { x: "Sensor 4", value: numbers[3].value },
+            { x: "Sensor 5", value: numbers[4].value },
+            { x: "Sensor 6", value: numbers[5].value },
         ];
         chart.data(data);
 
@@ -39,15 +41,9 @@ $(document).ready(function(){
         chart.container('chart');
         chart.draw();
 
-        var numbers = [ num1, num2, num3, num4, num5, num6 ].sort().reverse();
-        get_label = function(n) {
-            if (n == num1) return "Sensor 1: " + n;
-            if (n == num2) return "Sensor 2: " + n;
-            if (n == num3) return "Sensor 3: " + n;
-            if (n == num4) return "Sensor 4: " + n;
-            if (n == num5) return "Sensor 5: " + n;
-            if (n == num6) return "Sensor 6: " + n;
-        }
+        compare_func = function(a, b) { return parseInt(a) - parseInt(b); };
+        var sorted_numbers = numbers.sort(compare_func).reverse();
+        get_label = function(n) { return `${n.label} ${n.value}`; };
 
         $("#id_01").text(get_label(numbers[0]));
         $("#id_02").text(get_label(numbers[1]));
