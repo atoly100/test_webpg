@@ -132,7 +132,7 @@ def randomNumberGenerator():
         print("I am printing data 2 '" + str(data2) + "'")
         #data3 = aio3.receive('sensor3').value
         print("I am printing data3   '" + str(data3) + "'")
-        socketio.emit('newnumber', {'number': data1}, namespace='/test', callback=ack)
+        socketio.emit('newnumber1', {'number': data1}, namespace='/test', callback=ack)
         socketio.emit('newnumber2', {'number': data2}, namespace='/test', callback=ack)
         socketio.emit('newnumber3', {'number': data3}, namespace='/test', callback=ack)
         socketio.emit('newnumber4', {'number': data4}, namespace='/test', callback=ack)

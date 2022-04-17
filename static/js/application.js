@@ -22,14 +22,17 @@ $(document).ready(function(){
         chart.title("Accumulated Volume (in mL)");
 
         // add the data
-        var data = [
-            { x: "Sensor 1", value: numbers[0].value },
-            { x: "Sensor 2", value: numbers[1].value },
-            { x: "Sensor 3", value: numbers[2].value },
-            { x: "Sensor 4", value: numbers[3].value },
-            { x: "Sensor 5", value: numbers[4].value },
-            { x: "Sensor 6", value: numbers[5].value },
-        ];
+        var data = [];
+        numbers.forEach(function(a, index) {
+            data.push({ x: `Sensor ${index + 1}`, value: a.value });
+        });
+//            { x: "Sensor 1", value: numbers[0].value },
+//            { x: "Sensor 2", value: numbers[1].value },
+//            { x: "Sensor 3", value: numbers[2].value },
+//            { x: "Sensor 4", value: numbers[3].value },
+//            { x: "Sensor 5", value: numbers[4].value },
+//            { x: "Sensor 6", value: numbers[5].value },
+//        ];
         chart.data(data);
 
         // set legend position
@@ -47,7 +50,7 @@ $(document).ready(function(){
         numbers.forEach(function(a) { sorted_numbers.push({ label: a.label, value: a.value })});
         sorted_numbers.sort(compare_func).reverse();
         get_label = function(n) { return `${n.label} ${n.value}`; };
-        var update_func = function(a, index){ $(`#id_0${index}`).text(get_label(sorted_numbers[index])); };
+        var update_func = function(a, index){ $(`#id_0${index + 1}`).text(get_label(sorted_numbers[index])); };
         sorted_numbers.forEach(update_func);
 //        $("#id_01").text(get_label(sorted_numbers[0]));
 //        $("#id_02").text(get_label(sorted_numbers[1]));
@@ -61,40 +64,48 @@ $(document).ready(function(){
     setInterval(chart_redraw, 5000);
 
     //receive details from server
-    socket.on('newnumber', function(msg) {
-        console.log("Received number 1" + msg);
-        numbers[0].value = parseInt(msg.number);
-        $('#log').attr("placeholder", "Sensor 1: " + msg.number).blur();
+    numbers.forEach(function(a, index) {
+        socket.on(`newnumber${index + 1}`, function(msg) {
+            console.log(`Received number ${index + 1} ${msg}`);
+            a.value = parseInt(msg.number);
+            $(`#log${index + 1}`).attr("placeholder", `${a.label} ${a.value}`).blur();
+        });
     });
-
-    socket.on('newnumber2', function(msg) {
-        console.log("Received number 2" + msg);
-        numbers[1].value = parseInt(msg.number);
-        $('#log2').attr("placeholder", "Sensor 2: " + msg.number).blur();
-    });
-
-    socket.on('newnumber3', function(msg) {
-        console.log("Received number 3" + msg);
-        numbers[2].value = parseInt(msg.number);
-        $('#log3').attr("placeholder", "Sensor 3: " + msg.number).blur();
-    });
-
-    socket.on('newnumber4', function(msg) {
-        console.log("Received number 4" + msg);
-        numbers[3].value = parseInt(msg.number);
-        $('#log4').attr("placeholder", "Sensor 4: " + msg.number).blur();
-    });
-
-    socket.on('newnumber5', function(msg) {
-        console.log("Received number 5" + msg);
-        numbers[4].value = parseInt(msg.number);
-        $('#log5').attr("placeholder", "Sensor 5: " + msg.number).blur();
-    });
-
-    socket.on('newnumber6', function(msg) {
-        console.log("Received number 6" + msg);
-        numbers[5].value = parseInt(msg.number);
-        $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
-    });
+//
+//    socket.on('newnumber', function(msg) {
+//        console.log("Received number 1" + msg);
+//        numbers[0].value = parseInt(msg.number);
+//        $('#log').attr("placeholder", "Sensor 1: " + msg.number).blur();
+//    });
+//
+//    socket.on('newnumber2', function(msg) {
+//        console.log("Received number 2" + msg);
+//        numbers[1].value = parseInt(msg.number);
+//        $('#log2').attr("placeholder", "Sensor 2: " + msg.number).blur();
+//    });
+//
+//    socket.on('newnumber3', function(msg) {
+//        console.log("Received number 3" + msg);
+//        numbers[2].value = parseInt(msg.number);
+//        $('#log3').attr("placeholder", "Sensor 3: " + msg.number).blur();
+//    });
+//
+//    socket.on('newnumber4', function(msg) {
+//        console.log("Received number 4" + msg);
+//        numbers[3].value = parseInt(msg.number);
+//        $('#log4').attr("placeholder", "Sensor 4: " + msg.number).blur();
+//    });
+//
+//    socket.on('newnumber5', function(msg) {
+//        console.log("Received number 5" + msg);
+//        numbers[4].value = parseInt(msg.number);
+//        $('#log5').attr("placeholder", "Sensor 5: " + msg.number).blur();
+//    });
+//
+//    socket.on('newnumber6', function(msg) {
+//        console.log("Received number 6" + msg);
+//        numbers[5].value = parseInt(msg.number);
+//        $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
+//    });
 
 });
