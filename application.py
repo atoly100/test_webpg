@@ -123,8 +123,8 @@ def randomNumberGenerator():
         #     data1 = msg.message.data.decode("utf_8")
         data = [0, 0, 0, 0, 0, 0]
         for i in range(6):
-            data[i] = query_latest_number("node{}".format(i))
-            socketio.emit("newnumber{}".format(i), {'number': data[i]}, namespace='/test', callback=ack)
+            data[i] = query_latest_number("node{}".format(i + 1))
+            socketio.emit("newnumber{}".format(i + 1), {'number': data[i]}, namespace='/test', callback=ack)
         # data2 = query_latest_number("node2")
         # data3 = query_latest_number("node3")
         # data4 = query_latest_number("node4")
