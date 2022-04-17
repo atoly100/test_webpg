@@ -83,13 +83,13 @@ $(document).ready(function(){
 
     socket.on('newnumber5', function(msg) {
         console.log("Received number 5" + msg);
-        numbers[4] = msg.number;
+        numbers[4].value = msg.number;
         $('#log5').attr("placeholder", "Sensor 5: " + msg.number).blur();
     });
 
     socket.on('newnumber6', function(msg) {
         console.log("Received number 6" + msg);
-        numbers[5] = msg.number;
+        numbers[5].value = msg.number;
         $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
     });
 
