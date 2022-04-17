@@ -59,38 +59,38 @@ $(document).ready(function(){
     //receive details from server
     socket.on('newnumber', function(msg) {
         console.log("Received number 1" + msg);
-        num1 = msg.number;
-        $('#log').attr("placeholder", "Sensor 1: " + num1).blur();
+        numbers[0].value = msg.number;
+        $('#log').attr("placeholder", "Sensor 1: " + msg.number).blur();
     });
 
     socket.on('newnumber2', function(msg) {
         console.log("Received number 2" + msg);
-        num2 = msg.number;
-        $('#log2').attr("placeholder", "Sensor 2: " + num2).blur();
+        numbers[1].value = msg.number;
+        $('#log2').attr("placeholder", "Sensor 2: " + msg.number).blur();
     });
 
     socket.on('newnumber3', function(msg) {
         console.log("Received number 3" + msg);
-        num3 = msg.number;
-        $('#log3').attr("placeholder", "Sensor 3: " + num3).blur();
+        numbers[2].value = msg.number;
+        $('#log3').attr("placeholder", "Sensor 3: " + msg.number).blur();
     });
 
     socket.on('newnumber4', function(msg) {
         console.log("Received number 4" + msg);
-        num4 = msg.number;
-        $('#log4').attr("placeholder", "Sensor 4: " + num4).blur();
+        numbers[3].value = msg.number;
+        $('#log4').attr("placeholder", "Sensor 4: " + msg.number).blur();
     });
 
     socket.on('newnumber5', function(msg) {
         console.log("Received number 5" + msg);
-        num5 = msg.number;
-        $('#log5').attr("placeholder", "Sensor 5: " + num5).blur();
+        numbers[4] = msg.number;
+        $('#log5').attr("placeholder", "Sensor 5: " + msg.number).blur();
     });
 
     socket.on('newnumber6', function(msg) {
         console.log("Received number 6" + msg);
-        num6 = msg.number;
-        $('#log6').attr("placeholder", "Sensor 6: " + num6).blur();
+        numbers[5] = msg.number;
+        $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
     });
 
 });
