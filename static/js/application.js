@@ -107,5 +107,4 @@ $(document).ready(function(){
 //        numbers[5].value = parseInt(msg.number);
 //        $('#log6').attr("placeholder", "Sensor 6: " + msg.number).blur();
 //    });
-
 });
